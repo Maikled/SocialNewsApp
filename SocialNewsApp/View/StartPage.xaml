@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="SocialNewsApp.View.StartPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SocialNewsApp.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:a="using:SocialNewsApp.Sources.VK_Source.View"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <Style x:Key="gridStyle" TargetType="Grid">
+            <Setter Property="Margin" Value="100"/>
+        </Style>
+        <Style x:Key="imageStyle" TargetType="Image">
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Margin" Value="20,20,20,0"/>
+            <Setter Property="MaxWidth" Value="130"/>
+        </Style>
+        <Style x:Key="titleStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#2980B9"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="progressRingStyle" TargetType="ProgressRing">
+            <Setter Property="MaxWidth" Value="50"/>
+            <Setter Property="MaxHeight" Value="50"/>
+            <Setter Property="Foreground" Value="#2980B9"/>
+        </Style>
+    </Page.Resources>
+
+
+    <Grid Grid.Row="1" Style="{StaticResource gridStyle}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="8*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Image Grid.Row="0" Source="/Resources/SocialNewsAppLogo.svg" Style="{StaticResource imageStyle}"/>
+            <TextBlock Grid.Row="1" Text="SOCIAL NEWS APP" Style="{StaticResource titleStyle}"/>
+        </Grid>
+
+        <Frame Grid.Row="1" x:Name="authorizationFrame" Loaded="authorizationFrame_Loaded">
+            <ProgressRing Style="{StaticResource progressRingStyle}"/>
+        </Frame>
+    </Grid>
+</Page>

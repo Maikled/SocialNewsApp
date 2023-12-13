@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="SocialNewsApp.View.NewsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SocialNewsApp.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <Style x:Key="webViewStyle" TargetType="WebView2">
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+        </Style>
+        <Style x:Key="buttonBackStyle" TargetType="AppBarButton">
+            <Setter Property="LabelPosition" Value="Collapsed"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="titleTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+        <Style x:Key="subtitleTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid DataContext="{x:Bind NewsResult}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="5">
+            <AppBarButton Icon="Back" Click="AppBarButton_Click" Style="{StaticResource buttonBackStyle}"/>
+            <StackPanel Spacing="3">
+                <TextBlock Text="{Binding Title}" Style="{StaticResource titleTextBlockStyle}"/>
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <TextBlock Text="{Binding NewsAggregator.Name}" Style="{StaticResource subtitleTextBlockStyle}"/>
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <TextBlock Text="Найдено по ключевому слову:" Style="{StaticResource subtitleTextBlockStyle}"/>
+                        <TextBlock Text="{Binding KeyWord}" Style="{StaticResource subtitleTextBlockStyle}"/>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+        <WebView2 Grid.Row="1" Source="{Binding URI}" Style="{StaticResource webViewStyle}"/>
+    </Grid>
+</Page>

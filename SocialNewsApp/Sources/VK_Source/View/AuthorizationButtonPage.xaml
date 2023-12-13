@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="SocialNewsApp.Sources.VK_Source.View.AuthorizationButtonPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SocialNewsApp.Sources.VK_Source.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <Style x:Key="stackPanelStyle" TargetType="StackPanel">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Spacing" Value="5"/>
+        </Style>
+        <Style x:Key="buttonStyle" TargetType="Button">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="MaxWidth" Value="327"/>
+            <Setter Property="MaxHeight" Value="40"/>
+            <Setter Property="MinWidth" Value="210"/>
+            <Setter Property="Padding" Value="6"/>
+            <Setter Property="Background" Value="#0077FF"/>
+            <Setter Property="CornerRadius" Value="15"/>
+        </Style>
+        <Style x:Key="logoStyle" TargetType="Image">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="buttonTextStyle" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontFamily" Value="Calibri"/>
+        </Style>
+        <Style x:Key="hyperlinkButtonStyle" TargetType="HyperlinkButton" BasedOn="{StaticResource DefaultHyperlinkButtonStyle}">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="sendDataTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Foreground" Value="Gray"/>
+        </Style>
+        <Style x:Key="fontIconStyle" TargetType="FontIcon">
+            <Setter Property="Foreground" Value="Gray"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+        </Style>
+    </Page.Resources>
+
+    <StackPanel Style="{StaticResource stackPanelStyle}">
+        <Button Style="{StaticResource buttonStyle}" Click="AuthorizationButton_Click">
+            <Button.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.ThemeDictionaries>
+                        <ResourceDictionary x:Key="Light">
+                            <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#0077DD"/>
+                            <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#0077FF"/>
+                        </ResourceDictionary>
+                    </ResourceDictionary.ThemeDictionaries>
+                </ResourceDictionary>
+            </Button.Resources>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="10*"/>
+                </Grid.ColumnDefinitions>
+
+                <Image Grid.Column="0" Source="../Resources/logo.svg" Style="{StaticResource logoStyle}"/>
+                <TextBlock Grid.Column="1" Text="Войти через VK ID" Style="{StaticResource buttonTextStyle}"/>
+            </Grid>
+        </Button>
+
+        <HyperlinkButton Style="{StaticResource hyperlinkButtonStyle}" x:Name="sendDataHyperlink" Click="sendDataHyperlink_Click">
+            <StackPanel Orientation="Horizontal" Spacing="5">
+                <TextBlock Text="Передаваемые данные" Style="{StaticResource sendDataTextBlockStyle}"/>
+                <FontIcon Glyph="&#xE70D;" Style="{StaticResource fontIconStyle}"/>
+            </StackPanel>
+        </HyperlinkButton>
+
+        <TeachingTip x:Name="sendDataTeachingTip"
+                     Target="{Binding ElementName=sendDataHyperlink}"
+                     Title="Список получаемых сведений:"
+                     PreferredPlacement="Bottom">
+            <TextBlock HorizontalTextAlignment="Left">
+                <Run >
+                    - Просмотр стены пользователя
+                </Run>
+                <LineBreak/>
+                <Run>
+                    - Получение списка друзей пользователя
+                </Run>
+            </TextBlock>
+        </TeachingTip>
+    </StackPanel>
+</Page>
