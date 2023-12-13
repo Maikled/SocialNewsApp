@@ -26,8 +26,9 @@ namespace SocialNewsApp
         public MainWindow()
         {
             Instance = this;
-
+            SetSystemBackdrop();
             SetTitleBar();
+
             this.InitializeComponent();
 
             var hwnd = WindowNative.GetWindowHandle(this);
@@ -90,6 +91,24 @@ namespace SocialNewsApp
         {
             ContentControl.Content = uIElement;
             SetRegionsForCustomTitleBar(Instance, AppTitleBar, ContentControl);
+        }
+
+        private void SetSystemBackdrop()
+        {
+            if(Microsoft.UI.Composition.SystemBackdrops.MicaController.IsSupported())
+            {
+                Microsoft.UI.Xaml.Media.MicaBackdrop micaBackdrop = new Microsoft.UI.Xaml.Media.MicaBackdrop();
+                micaBackdrop.Kind = Microsoft.UI.Composition.SystemBackdrops.MicaKind.Base;
+                this.SystemBackdrop = micaBackdrop;
+            }
+            else
+            {
+                if (Microsoft.UI.Composition.SystemBackdrops.DesktopAcrylicController.IsSupported())
+                {
+                    Microsoft.UI.Xaml.Media.DesktopAcrylicBackdrop DesktopAcrylicBackdrop = new Microsoft.UI.Xaml.Media.DesktopAcrylicBackdrop();
+                    this.SystemBackdrop = DesktopAcrylicBackdrop;
+                }
+            }
         }
     }
 }
