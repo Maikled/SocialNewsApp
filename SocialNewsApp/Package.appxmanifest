@@ -9,13 +9,13 @@
 
   <Identity
     Name="SocialNewsApp"
-    Publisher="CN=zyuly"
-    Version="1.0.0.0" />
+    Publisher="CN=Maikled"
+    Version="1.0.1.0" />
 
   <mp:PhoneIdentity PhoneProductId="4b3fa63a-adb8-4b6a-b73a-c3742607fdc2" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>SocialNewsApp</DisplayName>
+    <DisplayName>Social News App</DisplayName>
     <PublisherDisplayName>zyuly</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
