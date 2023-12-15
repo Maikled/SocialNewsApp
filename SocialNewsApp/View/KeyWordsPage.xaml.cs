@@ -8,6 +8,9 @@ using System.Linq;
 
 namespace SocialNewsApp.View
 {
+    /// <summary>
+    /// Обработчик страницы ключевых слов
+    /// </summary>
     public sealed partial class KeyWordsPage : Page
     {
         public GeneralViewModel ViewModel { get; set; }
@@ -28,6 +31,9 @@ namespace SocialNewsApp.View
             base.OnNavigatedTo(e);
         }
 
+        /// <summary>
+        /// Обработчик кнопки "Загрузить больше ключевых слов"
+        /// </summary>
         private void HyperlinkButton_Click(object sender, RoutedEventArgs e)
         {
             ViewModel.TakeKeyWords(5);
@@ -39,6 +45,9 @@ namespace SocialNewsApp.View
             }
         }
 
+        /// <summary>
+        /// Обработчик нажатия на кнопку ключевого слова
+        /// </summary>
         private void ToggleButton_Click(object sender, RoutedEventArgs e)
         {
             var toggleButton = sender as ToggleButton;
@@ -73,6 +82,9 @@ namespace SocialNewsApp.View
             ShowPageContent();
         }
 
+        /// <summary>
+        /// Метод определния отображения шаблона контента ключевых слов
+        /// </summary>
         private void ShowPageContent()
         {
             if (ViewModel.KeyWords.Count == 0)

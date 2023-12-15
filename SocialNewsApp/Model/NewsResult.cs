@@ -2,6 +2,9 @@
 
 namespace SocialNewsApp.Model
 {
+    /// <summary>
+    /// Класс новости
+    /// </summary>
     public class NewsResult
     {
         public string Title { get; set; }

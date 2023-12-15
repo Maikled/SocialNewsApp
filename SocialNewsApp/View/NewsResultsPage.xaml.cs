@@ -45,6 +45,9 @@ namespace SocialNewsApp.View
             }
         }
 
+        /// <summary>
+        /// Обработчик нажатия на новостной элемент
+        /// </summary>
         private void SettingsCard_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
         {
             var card = sender as FrameworkElement;

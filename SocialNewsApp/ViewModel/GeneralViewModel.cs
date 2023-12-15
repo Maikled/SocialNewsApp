@@ -15,15 +15,46 @@ namespace SocialNewsApp.ViewModel
 {
     public class GeneralViewModel
     {
+        /// <summary>
+        /// Список отображаемых ключевых слов
+        /// </summary>
         public ObservableCollection<KeyWord> KeyWords { get; set; } = new ObservableCollection<KeyWord>();
+
+        /// <summary>
+        /// Список выбранных ключевых слов
+        /// </summary>
         public ObservableCollection<KeyWord> SelectedKeyWords { get; set; } = new ObservableCollection<KeyWord>();
-        public ObservableCollection<NewsResult> NewsResults { get; set; } = new ObservableCollection<NewsResult>();
-        public ICollection<INewsAggregator> Aggregators { get; set; }
+
+        /// <summary>
+        /// Коллекция всех найденных ключевых слов
+        /// </summary>
         public IEnumerable<string> AllKeyWords { get; set; } = new List<string>();
+        
+        /// <summary>
+        /// Список новостей по ключевым словам
+        /// </summary>
+        public ObservableCollection<NewsResult> NewsResults { get; set; } = new ObservableCollection<NewsResult>();
+
+        /// <summary>
+        /// Коллекция доступных новостных агрегаторов
+        /// </summary>
+        public ICollection<INewsAggregator> Aggregators { get; set; }
+        
         public int LastCount { get; private set; } = 0;
+
+        /// <summary>
+        /// Флаг окончания списка ключевых слов
+        /// </summary>
         public bool IsEndedKeyWords { get; private set; } = false;
+        
+        /// <summary>
+        /// Аккаунт пользователя
+        /// </summary>
         public AccountPerson AccountPerson { get; set; }
         
+        /// <summary>
+        /// Событие загрузки ключевых слов
+        /// </summary>
         public event Action OnKeyWordsLoaded;
 
         public GeneralViewModel()
@@ -31,6 +62,9 @@ namespace SocialNewsApp.ViewModel
             LoadNewsAggregation();
         }
 
+        /// <summary>
+        /// Метод загрузки новостных агрегаторов
+        /// </summary>
         private void LoadNewsAggregation()
         {
             Aggregators = new List<INewsAggregator>();
@@ -43,6 +77,9 @@ namespace SocialNewsApp.ViewModel
             }
         }
 
+        /// <summary>
+        /// Метод загрузки информации об аккаунте пользователя
+        /// </summary>
         public async Task<AccountPerson> LoadAccountPerson()
         {
             var account = await new VK().GetAccountPersonAsync(AppSettings.Default.UserToken);
@@ -58,6 +95,9 @@ namespace SocialNewsApp.ViewModel
             return account;
         }
 
+        /// <summary>
+        /// Метод загрузки ключевых слов со стены пользователя
+        /// </summary>
         public async void LoadKeyWordsAsync()
         {
             var text = await new VK().GetSourceTextAsync();
@@ -76,6 +116,10 @@ namespace SocialNewsApp.ViewModel
             }
         }
 
+        /// <summary>
+        /// Метод отбора ключевых слов
+        /// </summary>
+        /// <param name="count">Количество отбираемых ключевых слов</param>
         public void TakeKeyWords(int count)
         {
             var getElements = AllKeyWords.Skip(LastCount).Take(count);
@@ -115,6 +159,10 @@ namespace SocialNewsApp.ViewModel
             }
         }
 
+        /// <summary>
+        /// Метод поиска новостей по ключевому слову
+        /// </summary>
+        /// <param name="keyWord">Ключевое слово</param>
         private void SearchNewsByKeyWord(string keyWord)
         {
             if (string.IsNullOrWhiteSpace(keyWord))

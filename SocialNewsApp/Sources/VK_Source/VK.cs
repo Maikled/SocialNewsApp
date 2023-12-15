@@ -9,9 +9,19 @@ using SocialNewsApp.Properties;
 
 namespace SocialNewsApp.Sources.VK_Source
 {
+    /// <summary>
+    /// Класс предоставляющий информации из социальной сети ВКонтакте
+    /// </summary>
     public class VK : ISource
     {
+        /// <summary>
+        /// Версия VK API 
+        /// </summary>
         public string ApiVersion { get; } = "5.199";
+
+        /// <summary>
+        /// Адрес сервиса авторизации пользователя
+        /// </summary>
         public string AuthorizationAddress { get; }
 
         private string _appID = "51794538";
@@ -35,6 +45,11 @@ namespace SocialNewsApp.Sources.VK_Source
             return stringBuilder.ToString();
         }
 
+        /// <summary>
+        /// Метод получения постов с ленты пользователя
+        /// </summary>
+        /// <param name="token">Пользовательский токен</param>
+        /// <returns>Массив постов пользователя</returns>
         private async Task<PostItem[]> GetPostsAsync(string token)
         {
             var urlPosts = new Uri($"https://api.vk.com/method/newsfeed.get?access_token={token}&filters=post&v={ApiVersion}&count=100");
@@ -53,6 +68,10 @@ namespace SocialNewsApp.Sources.VK_Source
             return await GetPostsAsync(token) != null ? true : false;
         }
 
+        /// <summary>
+        /// Метод получения информации об аккаунте пользователя
+        /// </summary>
+        /// <param name="token">Пользовательский токен</param>
         public async Task<AccountPerson> GetAccountPersonAsync(string token)
         {
             var urlAcountInfo = new Uri($"https://api.vk.com/method/account.getProfileInfo?access_token={token}&v={ApiVersion}");

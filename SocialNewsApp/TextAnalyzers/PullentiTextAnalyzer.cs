@@ -6,6 +6,9 @@ using System.Linq;
 
 namespace SocialNewsApp.TextAnalyzers
 {
+    /// <summary>
+    /// Анализатор текста Pullenti
+    /// </summary>
     public class PullentiTextAnalyzer : ITextAnalyzer
     {
         private Processor _processor;
@@ -20,6 +23,10 @@ namespace SocialNewsApp.TextAnalyzers
             _processor = ProcessorService.CreateProcessor();
         }
 
+        /// <summary>
+        /// Метод получения списка ключевых слов по тексту
+        /// </summary>
+        /// <param name="text">Текст для поиска ключевых слов</param>
         public IEnumerable<string> Analyze(string text)
         {
             var result = _processor.Process(new SourceOfAnalysis(text));
